@@ -10,7 +10,7 @@ LABEL "com.github.actions.icon"="package"
 LABEL "com.github.actions.color"="blue"
 
 RUN apt-get update \
-    && apt install git bash wget
+    && apt install -y git bash wget
 
 COPY entrypoint.sh /entrypoint.sh
 RUN echo Download $(curl -s https://api.github.com/repos/yjcyxky/metadata-tool/releases/latest | grep browser_download_url | cut -d '"' -f 4)
