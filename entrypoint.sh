@@ -3,12 +3,12 @@
 set -e
 
 DATA_DIR=$1
-export DB_PASSWD=$2
-export AUTH_KEY=$3
-export AUTH_VALUE=$4
-export DINGTALK_ACCESS_KEY=$5
-export DINGTALK_ACCESS_SECRET=$6
-export TEST_MODE=$7
+export DB_PASSWD=$INPUT_DBPASSWD
+export AUTH_KEY=$INPUT_AUTHKEY
+export AUTH_VALUE=$INPUT_AUTHVALUE
+export DINGTALK_ACCESS_TOKEN=$INPUT_DINGTALKACCESSTOKEN
+export DINGTALK_ACCESS_SECRET=$INPUT_DINGTALKACCESSSECRET
+export TEST_MODE=$2
 
 COMMAND="java -jar /opt/metadata-tool.jar -d ${DATA_DIR} -m -n -D"
 echo "Runing command: ${COMMAND}"
@@ -22,6 +22,9 @@ if [ "$TEST_MODE" == 'false' ]; then
         source $DATA_DIR/env.sh
         java -jar /opt/metadata-tool.jar -d ${DATA_DIR} -m -n -D
     fi
+else
+    echo "DB_PASSWD: ${DB_PASSWD}, AUTH_KEY: ${AUTH_KEY}, AUTH_VALUE: ${AUTH_VALUE}"
+    echo "DINGTALK_ACCESS_TOKEN: ${DINGTALK_ACCESS_TOKEN}, DINGTALK_ACCESS_SECRET: ${DINGTALK_ACCESS_SECRET}"
 fi
 
 echo ::set-output name=command::$COMMAND

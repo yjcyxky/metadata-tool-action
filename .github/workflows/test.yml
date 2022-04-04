@@ -17,12 +17,12 @@ jobs:
       - name: Fetch repository
         uses: actions/checkout@master
 
-      - name: Download files
+      - name: Test metadata tool
         id: metadata_tool
         uses: yjcyxky/metadata-tool-action@master
         with:
           dataDir: './'
-          dbPasswd: ${{ secrets.DATABASE_Passwd }}
+          dbPasswd: ${{ secrets.DATABASE_PASSWD }}
           authKey: ${{ secrets.METABASE_USERNAME }}
           authValue: ${{ secrets.METABASE_PASSWD }}
           dingtalkAccessToken: ${{ secrets.DINGTALK_ACCESS_TOKEN }}

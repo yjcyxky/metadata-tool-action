@@ -32,9 +32,4 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.dataDir }}
-    - ${{ inputs.dbPasswd }}
-    - ${{ inputs.authKey }}
-    - ${{ inputs.authValue }}
-    - ${{ inputs.dingtalkAccessToken }}
-    - ${{ inputs.dingtalkAccessSecret }}
     - ${{ inputs.testMode }}
