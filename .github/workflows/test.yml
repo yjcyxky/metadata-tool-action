@@ -1,0 +1,33 @@
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  test-publish-docker:
+    runs-on: ubuntu-latest
+    name: Publish docker image for test
+    steps:
+      - name: Configure environment
+        id: config
+        run: |
+          VERSION=$(echo $GITHUB_REF | sed -e "s/^refs\/tags\/v//")
+          echo ::set-output name=version::$VERSION
+
+      - name: Fetch repository
+        uses: actions/checkout@master
+
+      - name: Download files
+        id: metadata_tool
+        uses: yjcyxky/metadata-tool-action@master
+        with:
+          dataDir: './'
+          dbPasswd: ${{ secrets.DATABASE_Passwd }}
+          authKey: ${{ secrets.METABASE_USERNAME }}
+          authValue: ${{ secrets.METABASE_PASSWD }}
+          dingtalkAccessToken: ${{ secrets.DINGTALK_ACCESS_TOKEN }}
+          dingtalkAccessSecret: ${{ secrets.DINGTALK_ACCESS_SECRET }}
+          testMode: 'true'
+
+      - name: Output command
+        run: echo "${{steps.metadata_tool.outputs.command}}"

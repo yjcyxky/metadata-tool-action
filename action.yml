@@ -1,0 +1,40 @@
+name: 'metadata-tool-action'
+description: 'GitHub actions for metadata tool'
+author: 'Jingcheng Yang <yjcyxky@163.com>'
+branding:
+  icon: 'package'
+  color: 'blue'
+inputs:
+  dataDir:
+    description: 'Data directory'
+    required: true
+  dbPasswd:
+    description: 'Database host'
+    required: true
+  authKey:
+    description: 'Metabase Username'
+    required: true
+  authValue:
+    description: 'Metabase Password'
+    required: true
+  dingtalkAccessToken:
+    description: 'Access Token'
+    required: true
+  dingtalkAccessSecret:
+    description: 'Access Secret'
+    required: true
+  testMode:
+    description: 'Whether is it test mode?'
+    required: false
+    default: 'false'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.dataDir }}
+    - ${{ inputs.dbPasswd }}
+    - ${{ inputs.authKey }}
+    - ${{ inputs.authValue }}
+    - ${{ inputs.dingtalkAccessToken }}
+    - ${{ inputs.dingtalkAccessSecret }}
+    - ${{ inputs.testMode }}
